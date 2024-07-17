@@ -15,8 +15,8 @@ token_base();
 
 //one_damage_token_silk();
 //reminder_token_silk();
-experience_token_silk();
-
+//experience_token_silk();
+shield_token_silk();
 
 module token_base_polygon() {
     corner = 1.5;
@@ -211,6 +211,29 @@ module experience_token_silk() {
     translate([0,0,base_thickness - silk_thickness]) {
         linear_extrude(height=silk_thickness) {
             experience_token_design();
+            token_border();
+        }
+    }
+    }
+}
+
+module shield_token_design() {    
+
+    translate([base_height * .65, base_width *.32, 0])
+      rotate(a=[0, 0, 270])
+        text("^", size=4, halign="center", font="Star Jedi");
+    
+    translate([base_height * .82, base_width * .5, 0])
+      rotate(a=[0, 0, 270])
+        text("Shield", direction="ttb", size=3, halign="center", font="aurebesh");
+}
+
+
+module shield_token_silk() {
+        color("red") {
+    translate([0,0,base_thickness - silk_thickness]) {
+        linear_extrude(height=silk_thickness) {
+            shield_token_design();
             token_border();
         }
     }
