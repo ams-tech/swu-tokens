@@ -14,7 +14,8 @@ border_relief = 1;
 token_base();
 
 //one_damage_token_silk();
-reminder_token_silk();
+//reminder_token_silk();
+experience_token_silk();
 
 
 module token_base_polygon() {
@@ -177,6 +178,39 @@ module reminder_token_silk() {
     translate([0,0,base_thickness - silk_thickness]) {
         linear_extrude(height=silk_thickness) {
             reminder_token_design();
+            token_border();
+        }
+    }
+    }
+}
+
+module plus_one() {
+    translate([-4, 0, 0])
+    text("+", size=5, halign="center", font="Marion");
+    text("1", size=6, halign="center", font="Star Jedi");
+}
+
+module experience_token_design() {    
+
+    translate([base_height * .6, base_width *.5, 0])
+      rotate(a=[0, 0, 270])
+        plus_one();
+    
+    translate([base_height * .65, base_width * .08, 0])
+    rotate([0, 0, 30])
+    square([silk_thickness, base_width * .95]);
+    
+    translate([base_height * .2, base_width *.38, 0])
+      rotate(a=[0, 0, 270])
+        plus_one();
+}
+
+
+module experience_token_silk() {
+        color("red") {
+    translate([0,0,base_thickness - silk_thickness]) {
+        linear_extrude(height=silk_thickness) {
+            experience_token_design();
             token_border();
         }
     }
