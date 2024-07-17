@@ -6,13 +6,15 @@ base_height = 24;
 base_thickness = 3;
 
 // "silkscreen" properties
-silk_thickness = .5;
+silk_thickness = 1;
 border_thickness = 1;
 // Distance from the edge of the border to the edge of the token
 border_relief = 1;
 
-//token_base();
-one_damage_token_silk();
+token_base();
+
+//one_damage_token_silk();
+reminder_token_silk();
 
 
 module token_base_polygon() {
@@ -93,7 +95,6 @@ module ten_damage_token_design() {
 }
 
 
-
 module ten_damage_token_silk() {
     color("red") {
     translate([0,0,base_thickness - silk_thickness]) {
@@ -152,6 +153,30 @@ module one_damage_token_silk() {
     translate([0,0,base_thickness - silk_thickness]) {
         linear_extrude(height=silk_thickness) {
             one_damage_token_design();
+            token_border();
+        }
+    }
+    }
+}
+
+
+module reminder_token_design() {    
+
+    translate([2 * border_relief + border_thickness + 8.25, base_width *.3, 0])
+      rotate(a=[0, 0, 270])
+        text("!", size=6, halign="center", font="Star Jedi");
+    
+    translate([base_height * .78, base_width * .45, 0])
+      rotate(a=[0, 0, 270])
+        text("attn", direction="ttb", size=4, halign="center", font="aurebesh");
+}
+
+
+module reminder_token_silk() {
+        color("red") {
+    translate([0,0,base_thickness - silk_thickness]) {
+        linear_extrude(height=silk_thickness) {
+            reminder_token_design();
             token_border();
         }
     }
