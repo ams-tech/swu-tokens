@@ -11,12 +11,12 @@ border_thickness = 1;
 // Distance from the edge of the border to the edge of the token
 border_relief = 1;
 
-token_base();
+//token_base();
 
 //one_damage_token_silk();
 //reminder_token_silk();
-//experience_token_silk();
-shield_token_silk();
+experience_token_silk();
+//shield_token_silk();
 
 module token_base_polygon() {
     corner = 1.5;
@@ -163,13 +163,13 @@ module one_damage_token_silk() {
 
 module reminder_token_design() {    
 
-    translate([2 * border_relief + border_thickness + 8.25, base_width *.3, 0])
+    translate([base_height * .2, base_width *.65, 0])
       rotate(a=[0, 0, 270])
-        text("!", size=6, halign="center", font="Star Jedi");
+        text("!", size=12, halign="center", font="Star Jedi");
     
-    translate([base_height * .78, base_width * .45, 0])
+    translate([base_height * .78, base_width * .18, 0])
       rotate(a=[0, 0, 270])
-        text("attn", direction="ttb", size=4, halign="center", font="aurebesh");
+        text("attn", direction="ttb", size=3, halign="center", font="aurebesh");
 }
 
 
