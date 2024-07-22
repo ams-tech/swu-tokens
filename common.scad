@@ -6,15 +6,15 @@ base_height = 24;
 base_thickness = 3;
 
 // "silkscreen" properties
-silk_thickness = 1;
+silk_thickness = 0.5;
 border_thickness = 1;
 // Distance from the edge of the border to the edge of the token
 border_relief = 1;
 
+corner = 1.5;
+notch = 5;
+
 module token_base_polygon() {
-    corner = 1.5;
-    notch = 5;
-    
     points=[
         [0, notch, corner],
         [0, base_width, corner],
@@ -33,6 +33,19 @@ module token_base() {
     }
     }
 }
+
+// A shape that can hold the token flipped in either orientation
+module token_insert_floor() {
+    points=[
+        [0, base_width, corner],
+        [base_height, base_width, corner],
+        [base_height, 0, corner],
+        [0, 0, corner],
+    ];
+    linear_extrude(height=base_thickness)
+    polygon(polyRound(points,5));
+}
+
 
 module token_border() {    
 
