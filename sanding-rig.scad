@@ -1,23 +1,28 @@
 include <common.scad>
 
 
-num_x = 3;
-num_y = 5;
+num_x = 4;
+num_y = 6;
 
 gap_size = 3;
 // Extra distance inside each hole, in mm
-interior_tolerance = .2;
+interior_tolerance = .3;
 
 floor_thickness = 2;
-exposed_percentage = .5;
+exposed_percentage = .2;
 
 // Size to scale down for cutting out of the floor (more saves plastic)
 floor_cutout_ratio = .7;
 
+grip_offset = 5*base_width;
+
+grip_height = 100;
+grip_radius = 15;
+
 module main_block() {
     // Main block dimensions
     block_y = (base_width + gap_size + interior_tolerance) * num_y - gap_size;
-    block_x = (base_height + gap_size + interior_tolerance) * num_x - gap_size;
+    block_x = (base_height + gap_size + interior_tolerance) * num_x - gap_size + grip_offset;
     block_z = floor_thickness + (1 - exposed_percentage) * base_thickness;
 
     // Draw the main block
@@ -26,6 +31,16 @@ module main_block() {
         square([block_x, block_y]);
         circle(r=gap_size);
     }
+    
+    // Draw the grip cylinder
+    $fn = 100;
+    
+    translate([
+        block_x - grip_radius - floor_thickness,
+        block_y / 2,
+        0
+    ])
+    cylinder(h=grip_height, r=grip_radius);
 }
 
 // Calculate the scale of the inserts
