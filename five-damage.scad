@@ -2,13 +2,13 @@ include <common.scad>
 
 module five_damage_token_design() {    
 
-    translate([2 * border_relief + border_thickness + 8.25, base_width *.35, 0])
+    translate([base_height * .4, base_width *.32, 0])
       rotate(a=[0, 0, 270])
-        text("5", size=6, halign="center", font="Star Jedi");
+        text("5", size=number_font_size, halign="center", font="Star Jedi");
     
-    translate([base_height * .78, base_width * .55, 0])
+    translate([base_height * .83, base_width * .5, 0])
       rotate(a=[0, 0, 270])
-        text("five", direction="ttb", size=3.5, halign="center", font="aurebesh");
+        text("five", direction="ttb", size=text_font_size, halign="center", font="aurebesh");
 }
 
 module five_damage_top_silk() {
@@ -55,3 +55,7 @@ module five_damage_token_base() {
         five_damage_top_silk();
     }
 }
+
+
+five_damage_token_base();
+five_damage_token_silk();

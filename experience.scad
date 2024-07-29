@@ -8,7 +8,7 @@ module plus_one() {
 
 module experience_token_design() {    
 
-    translate([base_height * .6, base_width *.5, 0])
+    translate([base_height * .6, base_width *.48, 0])
       rotate(a=[0, 0, 270])
         plus_one();
     
@@ -65,3 +65,6 @@ module experience_token_base() {
         experience_top_silk();
     }
 }
+
+experience_token_base();
+experience_token_silk();

@@ -5,6 +5,9 @@ base_width = 16;
 base_height = 24;
 base_thickness = 3;
 
+text_font_size = 4;
+number_font_size = 6;
+
 // "silkscreen" properties
 silk_thickness = 0.5;
 border_thickness = 1;

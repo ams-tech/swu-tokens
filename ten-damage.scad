@@ -55,3 +55,7 @@ module ten_damage_token_base() {
         ten_damage_top_silk();
     }
 }
+
+
+ten_damage_token_base();
+ten_damage_token_silk();

@@ -2,13 +2,13 @@ include <common.scad>
 
 module reminder_token_design() {    
 
-    translate([base_height * .2, base_width *.65, 0])
+    translate([base_height * .4, base_width * .3, 0])
       rotate(a=[0, 0, 270])
-        text("!", size=12, halign="center", font="Star Jedi");
+        text("!", size=number_font_size, halign="center", font="Star Jedi");
     
-    translate([base_height * .78, base_width * .18, 0])
+    translate([base_height * .82, base_width * .42, 0])
       rotate(a=[0, 0, 270])
-        text("attn", direction="ttb", size=3, halign="center", font="aurebesh");
+        text("attn", direction="ttb", size=text_font_size, halign="center", font="aurebesh");
 }
 
 module reminder_top_silk() {
@@ -55,3 +55,7 @@ module reminder_token_base() {
         reminder_top_silk();
     }
 }
+
+
+reminder_token_base();
+reminder_token_silk();

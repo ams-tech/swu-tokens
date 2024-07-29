@@ -2,11 +2,11 @@ include <common.scad>
 
 module shield_token_design() {    
 
-    translate([base_height * .45, base_width *.5, 0])
+    translate([base_height * .48, base_width *.5, 0])
       rotate(a=[0, 0, 270])
-        text("^", size=7, halign="center", font="Star Jedi");
+        text("^", size=number_font_size, halign="center", font="Star Jedi");
     
-    translate([base_height * .28, base_width * .5, 0])
+    translate([base_height * .28, base_width * .49, 0])
       rotate(a=[0, 0, 270])
         text("SHD",  size=3.5, halign="center", font="aurebesh");
 }
@@ -55,3 +55,7 @@ module shield_token_base() {
         shield_top_silk();
     }
 }
+
+
+shield_token_base();
+shield_token_silk();
