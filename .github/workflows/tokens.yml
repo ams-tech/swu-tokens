@@ -2,6 +2,7 @@ name: tokens
 on: [push, pull_request]
 jobs:
   get-manifest:
+    name: Generate Build Manifest
     runs-on: ubuntu-latest
     outputs:
       manifest: ${{ steps.set-manifest.outputs.manifest }}
@@ -10,6 +11,7 @@ jobs:
       - id: set-manifest
         run: python3 create_target_matrix.py >> $GITHUB_OUTPUT
   compile:
+    name: Compile OpenScad Files
     needs: get-manifest
     runs-on: ubuntu-latest
     strategy:
@@ -30,7 +32,8 @@ jobs:
           path: |
             build
           retention-days: 1
-  release_package:
+  release-package:
+    name: Generate Release Packge
     needs: compile
     runs-on: ubuntu-latest
     steps:
@@ -48,6 +51,30 @@ jobs:
           name: release-package
           path: |
             build
+  release:
+    name: Create Github Release
+    needs: release-package
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/checkout@v4 
+        with:
+          path: swu-tokens-source-$GITHUB_REF_NAME
+      - name: Create Source Tarall
+        run: tar czf swu-tokens-source-$GITHUB_REF_NAME.tar.gz swu-tokens-source-$GITHUB_REF_NAME
+      - name: Download all existing artifacts
+        uses: actions/download-artifact@v4
+        with: 
+          name: release-package
+          path: swu-tokens-$GITHUB_REF_NAME
+      - name: Create Build Tarall
+        run: tar czf swu-tokens-$GITHUB_REF_NAME.tar.gz swu-tokens-$GITHUB_REF_NAME
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: *.tar.gz
+          tag_name: $GITHUB_REF_NAME
+      
       
 
 
