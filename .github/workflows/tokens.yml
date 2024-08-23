@@ -15,10 +15,10 @@ jobs:
     strategy:
         matrix: ${{fromJson(needs.get-manifest.outputs.manifest)}}
     env:
-      BUILD_DIR: build
-      BUILD_TARGET_DIR: ${BUILD_DIR}/${{ matrix.target }}
-      BUILD_OUTPUT: ${BUILD_TARGET_DIR}/${{ matrix.component }}.stl
-      BUILD_INPUT: target/${{ matrix.target }}/${{ matrix.component }}.scad
+      BUILD_DIR: "build"
+      BUILD_TARGET_DIR: "${BUILD_DIR}/${{ matrix.target }}"
+      BUILD_OUTPUT: "${BUILD_TARGET_DIR}/${{ matrix.component }}.stl"
+      BUILD_INPUT: "target/${{ matrix.target }}/${{ matrix.component }}.scad"
     steps:
       - name: Install Openscad
         run: |
