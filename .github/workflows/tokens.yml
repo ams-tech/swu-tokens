@@ -1,32 +1,21 @@
 name: tokens
 on: [push, pull_request]
 jobs:
-  list-tokens:
+  get-manifest:
     runs-on: ubuntu-latest
     outputs:
-      tokens: ${{ steps.set-tokens.outputs.tokens }}
+      manifest: ${{ steps.set-manifest.outputs.manifest }}
     steps:
       - uses: actions/checkout@v2
-      - id: set-tokens
-        run: echo "::set-output name=tokens::$(ls tokens | jq -R -s -c 'split("\n")[:-1]')"
+      - id: set-manifest
+        run: python3 create_target_matrix.py >> $GITHUB_OUTPUT
   list-token-components:
-    needs: list-tokens
+    needs: get-manifest
     runs-on: ubuntu-latest
     strategy:
         matrix:
-            token: ${{ fromJson(needs.list-tokens.outputs.tokens) }}
-    outputs:
-      components: ${{ steps.set-components.outputs.components }}
+            include: ${{fromJson(needs.get-maanifest.outputs.manifest)}}
     steps:
       - uses: actions/checkout@v2   
-      - id: set-components
-        run: echo "::set-output name=components::$(ls tokens/${{ matrix.token }} | jq -R -s -c 'split("\n")[:-1]')"
-  compile:
-    needs: list-token-components
-    runs-on: ubuntu-latest
-    strategy:
-        matrix:
-            component: ${{ fromJson(needs.list-token-components.outputs.components) }}
-    steps:
-      - uses: actions/checkout@v2   
-      - run: echo "token ${{ matrix.component }}"
+      - run: echo "target: ${{ matrix.target }} component: ${{ matrix.component }}"
+
