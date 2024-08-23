@@ -6,7 +6,7 @@ jobs:
     outputs:
       manifest: ${{ steps.set-manifest.outputs.manifest }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - id: set-manifest
         run: python3 create_target_matrix.py >> $GITHUB_OUTPUT
   compile:
@@ -14,17 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
         matrix: ${{fromJson(needs.get-manifest.outputs.manifest)}}
-    env:
-      BUILD_DIR: "build"
-      BUILD_TARGET_DIR: "${BUILD_DIR}/${{ matrix.target }}"
-      BUILD_OUTPUT: "${BUILD_TARGET_DIR}/${{ matrix.component }}.stl"
-      BUILD_INPUT: "target/${{ matrix.target }}/${{ matrix.component }}.scad"
     steps:
       - name: Install Openscad
         run: |
           sudo apt update
           sudo apt install -y openscad
-      - uses: actions/checkout@v2   
+      - uses: actions/checkout@v4   
       - run: mkdir -p build/${{ matrix.target }}
       - name: Compile Component
         run: openscad -o "build/${{ matrix.target }}/${{ matrix.component }}.stl" "target/${{ matrix.target }}/${{ matrix.component }}.scad"
@@ -35,4 +30,21 @@ jobs:
           path: |
             build
           retention-days: 1
+  release_package:
+    needs: compile
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4   
+      - name: Download all existing artifacts
+        uses: actions/download-artifact@v4
+        with: 
+          merge-multiple: true
+      - name: Upload Release Package
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-package
+          path: |
+            build
+      
+
 
