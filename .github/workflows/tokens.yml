@@ -28,10 +28,11 @@ jobs:
       - run: mkdir -p build/${{ matrix.target }}
       - name: Compile Component
         run: openscad -o "build/${{ matrix.target }}/${{ matrix.component }}.stl" "target/${{ matrix.target }}/${{ matrix.component }}.scad"
-      - name: Archive Compiled STL Files
+      - name: Archive Compiled STL File
         uses: actions/upload-artifact@v4
         with:
-          name: build/${{ matrix.target }}/${{ matrix.component }}.stl
+          name: build_${{ matrix.target }}_${{ matrix.component }}
           path: |
-            build/${{ matrix.target }}/${{ matrix.component }}.stl
+            build
+          retention-days: 1
 
