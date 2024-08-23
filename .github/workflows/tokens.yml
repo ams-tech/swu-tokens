@@ -20,13 +20,12 @@ jobs:
       BUILD_OUTPUT: ${BUILD_TARGET_DIR}/${{ matrix.component }}.stl
       BUILD_INPUT: target/${{ matrix.target }}/${{ matrix.component }}.scad
     steps:
+      - name: Install Openscad
+        run: |
+          sudo apt update
+          sudo apt install -y openscad
       - uses: actions/checkout@v2   
       - run: mkdir -p $BUILD_TARGET_DIR
-      - name: Build stl file
-        uses: flat35hd99/openscad-actions@v1.3
-        with:
-          scad_file: $BUILD_INPUT
-          output_file: $BUILD_OUTPUT
       - name: Archive Compiled STL Files
         uses: actions/upload-artifact@v4
         with:
