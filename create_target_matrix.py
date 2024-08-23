@@ -12,7 +12,7 @@ for t in target_dirs:
     components = [f.name for f in t.iterdir() if f.is_file()]
     targets.append({
         "target": t.name,
-        "components": components
+        "component": components
     })
 
 manifest = {"include": targets}
