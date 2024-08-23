@@ -17,5 +17,5 @@ jobs:
             include: ${{fromJson(needs.get-maanifest.outputs.manifest)}}
     steps:
       - uses: actions/checkout@v2   
-      - run: echo "target: ${{ matrix.target }} component: ${{ matrix.component }}"
+      - run: echo "target ${{ matrix.target }} component ${{ matrix.component }}"
 
