@@ -15,6 +15,9 @@ jobs:
     strategy:
         matrix:
             token: ${{ fromJson(needs.list-tokens.outputs.tokens) }}
+    outputs:
+      components: ${{ steps.set-components.outputs.components }}
     steps:
       - uses: actions/checkout@v2   
-      - run: echo "Building token ${{ matrix.token }}."
+      - id: set-components
+        run: echo "::set-output name=components::$(ls tokens/${{ matrix.token }} | jq -R -s -c 'split("\n")[:-1]')"
