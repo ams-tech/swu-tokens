@@ -31,7 +31,7 @@ jobs:
       - name: Archive Compiled STL Files
         uses: actions/upload-artifact@v4
         with:
-          name: build
+          name: build/${{ matrix.target }}/${{ matrix.component }}.stl
           path: |
-            build
+            build/${{ matrix.target }}/${{ matrix.component }}.stl
 
