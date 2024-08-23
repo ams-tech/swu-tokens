@@ -65,6 +65,3 @@ module experience_token_base() {
         experience_top_silk();
     }
 }
-
-experience_token_base();
-experience_token_silk();
