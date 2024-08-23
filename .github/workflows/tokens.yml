@@ -4,17 +4,17 @@ jobs:
   list-tokens:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      tokens: ${{ steps.set-tokens.outputs.tokens }}
     steps:
       - uses: actions/checkout@v2
-      - id: set-matrix
-        run: echo "::set-output name=matrix::$(ls tokens | jq -R -s -c 'split("\n")[:-1]')"
-  check:
+      - id: set-tokens
+        run: echo "::set-output name=tokens::$(ls tokens | jq -R -s -c 'split("\n")[:-1]')"
+  list-token-components:
     needs: list-tokens
     runs-on: ubuntu-latest
     strategy:
         matrix:
-            token: ${{ fromJson(needs.list-tokens.outputs.matrix) }}
+            token: ${{ fromJson(needs.list-tokens.outputs.tokens) }}
     steps:
       - uses: actions/checkout@v2   
       - run: echo "Building token ${{ matrix.token }}."
