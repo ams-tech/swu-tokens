@@ -1,3 +1,3 @@
-import <../src/experience.scad>
+include <../../src/experience.scad>
 
 experience_token_silk();
