@@ -22,10 +22,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2   
       - run: mkdir -p $BUILD_TARGET_DIR
-      - uses: pkoehlers/openscad-build-action@v1
+      - name: Build stl file
+        uses: flat35hd99/openscad-actions@v1.3
         with:
-          input-file: $BUILD_INPUT
-          output-file: $BUILD_OUTPUT
+          scad_file: $BUILD_INPUT
+          output_file: $BUILD_OUTPUT
       - name: Archive Compiled STL Files
         uses: actions/upload-artifact@v4
         with:
