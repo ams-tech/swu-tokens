@@ -9,12 +9,13 @@ target_dirs = [f for f in TARGET_DIR.iterdir() if f.is_dir()]
 targets = []
 
 for t in target_dirs:
-    components = [f.name for f in t.iterdir() if f.is_file()]
+    components = [f for f in t.iterdir() if f.is_file()]
     for component in components:
-        targets.append({
-            "target": t.name,
-            "component": component
-        })
+        if component.suffix == ".scad":
+            targets.append({
+                "target": t.name,
+                "component": component.stem
+            })
 
 manifest = {"include": targets}
 

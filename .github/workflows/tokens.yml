@@ -9,12 +9,23 @@ jobs:
       - uses: actions/checkout@v2
       - id: set-manifest
         run: python3 create_target_matrix.py >> $GITHUB_OUTPUT
-  list-token-components:
+  compile:
     needs: get-manifest
     runs-on: ubuntu-latest
     strategy:
         matrix: ${{fromJson(needs.get-manifest.outputs.manifest)}}
+    env:
+      BUILD_DIR: build
+      BUILD_TARGET_DIR: ${BUILD_DIR}/${{ matrix.target }}
+      BUILD_OUTPUT: ${BUILD_TARGET_DIR}/${{ matrix.component }}.stl
+      BUILD_INPUT: target/${{ matrix.target }}/${{ maatrix.component }}.scad
     steps:
       - uses: actions/checkout@v2   
-      - run: echo "target ${{ matrix.target }} component ${{ matrix.component }}"
+      - run: mkdir -p $BUILD_TARGET_DIR
+      - name: Archive Compiled STL Files
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: |
+            build
 
