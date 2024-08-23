@@ -25,9 +25,9 @@ jobs:
           sudo apt update
           sudo apt install -y openscad
       - uses: actions/checkout@v2   
-      - run: mkdir -p $BUILD_TARGET_DIR
+      - run: mkdir -p build/${{ matrix.target }}
       - name: Compile Component
-        run: openscad -o $BUILD_OUTPUT $BUILD_INPUT
+        run: openscad -o "build/${{ matrix.target }}/${{ matrix.component }}.stl" "target/${{ matrix.target }}/${{ matrix.component }}.scad"
       - name: Archive Compiled STL Files
         uses: actions/upload-artifact@v4
         with:
