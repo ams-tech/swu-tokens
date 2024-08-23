@@ -26,6 +26,8 @@ jobs:
           sudo apt install -y openscad
       - uses: actions/checkout@v2   
       - run: mkdir -p $BUILD_TARGET_DIR
+      - name: Compile Component
+        run: openscad -o $BUILD_OUTPUT $BUILD_INPUT
       - name: Archive Compiled STL Files
         uses: actions/upload-artifact@v4
         with:
