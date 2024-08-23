@@ -15,5 +15,6 @@ for t in target_dirs:
         "components": components
     })
 
+manifest = {"include": targets}
 
-print(json.dumps(targets))
+print(f"manifest={json.dumps(manifest)}")

@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - id: set-manifest
-        run: echo 'manifest=$(python3 create_target_matrix.py)'
+        run: python3 create_target_maanifest.py
   list-token-components:
     needs: get-manifest
     runs-on: ubuntu-latest
