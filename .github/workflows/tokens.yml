@@ -17,4 +17,4 @@ jobs:
             token: ${{ fromJson(needs.list-tokens.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v2   
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: echo "Building token ${{ matrix.token }}."
