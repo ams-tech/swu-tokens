@@ -8,13 +8,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - id: set-manifest
-        run: python3 create_target_matrix.py
+        run: python3 create_target_matrix.py >> $GITHUB_OUTPUT
   list-token-components:
     needs: get-manifest
     runs-on: ubuntu-latest
     strategy:
-        matrix:
-            include: ${{fromJson(needs.get-maanifest.outputs.manifest)}}
+        matrix: ${{fromJson(needs.get-manifest.outputs.manifest)}}
     steps:
       - uses: actions/checkout@v2   
       - run: echo "target ${{ matrix.target }} component ${{ matrix.component }}"
