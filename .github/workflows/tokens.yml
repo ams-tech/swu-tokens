@@ -41,7 +41,7 @@ jobs:
           merge-multiple: true
           path: build
       - name: Copy Printing Instructions to Release Package
-        run: cp docs/PRINTING.md build/.
+        run: cp docs/PRINTING.md build/. && cp LICENSE.txt build/.
       - name: Upload Release Package
         uses: actions/upload-artifact@v4
         with:
