@@ -40,6 +40,8 @@ jobs:
         with: 
           merge-multiple: true
           path: build
+      - name: Copy Printing Instructions to Release Package
+        run: cp docs/PRINTING.md build/.
       - name: Upload Release Package
         uses: actions/upload-artifact@v4
         with:
