@@ -18,7 +18,7 @@ jobs:
       BUILD_DIR: build
       BUILD_TARGET_DIR: ${BUILD_DIR}/${{ matrix.target }}
       BUILD_OUTPUT: ${BUILD_TARGET_DIR}/${{ matrix.component }}.stl
-      BUILD_INPUT: target/${{ matrix.target }}/${{ maatrix.component }}.scad
+      BUILD_INPUT: target/${{ matrix.target }}/${{ matrix.component }}.scad
     steps:
       - uses: actions/checkout@v2   
       - run: mkdir -p $BUILD_TARGET_DIR
