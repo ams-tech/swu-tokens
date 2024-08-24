@@ -61,17 +61,17 @@ jobs:
         uses: actions/download-artifact@v4
         with: 
           name: release-package
-          path: "swu-tokens-${{ github.ref_name }}"
+          path: swu-tokens-${{ github.ref_name }}
       - name: Display structure of downloaded files
         run: ls -R
       - name: Create Build Tarall
-        run: tar czf "swu-tokens-${{ github.ref_name }}.tar.gz" "swu-tokens-${{ github.ref_name }}"
+        run: tar czf swu-tokens-${{ github.ref_name }}.tar.gz swu-tokens-${{ github.ref_name }}
       - name: Generate Github Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-           "swu-tokens-${{ github.ref_name }}.tar.gz"
-          tag_name: "${{ github.ref_name }}"
+           swu-tokens-${{ github.ref_name }}.tar.gz
+          tag_name: ${{ github.ref_name }}
           token: ${{ secrets.RELEASE_TOKEN_GITHUB }}
       
       
