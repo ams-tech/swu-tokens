@@ -61,6 +61,8 @@ jobs:
         uses: actions/download-artifact@v4
         with: 
           name: release-package
+      - name: Display structure of downloaded files
+        run: ls -R
       - name: Create Build Tarall
         run: |
          mv release-package "swu-tokens-${{ github.ref_name }}"
