@@ -63,7 +63,7 @@ jobs:
       - name: Create Source Tarall
         run: |
           mv swu-tokens-source "swu-tokens-source-${{ github.ref_name }}"
-          tar czf "swu-tokens-source-$GITHUB_REF_NAME.tar.gz" "swu-tokens-source-$GITHUB_REF_NAME"
+          tar czf "swu-tokens-source-${{ github.ref_name }}.tar.gz" "swu-tokens-source-${{ github.ref_name }}"
       - name: Download all existing artifacts
         uses: actions/download-artifact@v4
         with: 
@@ -71,15 +71,16 @@ jobs:
           path: swu-tokens
       - name: Create Build Tarall
         run: |
-         mv swu-tokens "swu-tokens-$GITHUB_REF_NAME"
-         tar czf "swu-tokens-$GITHUB_REF_NAME.tar.gz" "swu-tokens-$GITHUB_REF_NAME"
+         mv swu-tokens "swu-tokens-${{ github.ref_name }}"
+         tar czf "swu-tokens-${{ github.ref_name }}.tar.gz" "swu-tokens-${{ github.ref_name }}"
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-           "swu-tokens-$GITHUB_REF_NAME.tar.gz"
-           "swu-tokens-source-$GITHUB_REF_NAME.tar.gz"
-          tag_name: "$GITHUB_REF_NAME"
+           "swu-tokens-${{ github.ref_name }}.tar.gz"
+           "swu-tokens-source-${{ github.ref_name }}.tar.gz"
+          tag_name: "${{ github.ref_name }}"
+          token: ${{ secrets.RELEASE_TOKEN_GITHUB }}
       
       
 
