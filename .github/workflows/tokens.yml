@@ -62,7 +62,7 @@ jobs:
           path: swu-tokens-source
       - name: Create Source Tarall
         run: |
-          mv swu-tokens-source "swu-tokens-source-$GITHUB_REF_NAME"
+          mv swu-tokens-source "swu-tokens-source-${{ github.ref_name }}"
           tar czf "swu-tokens-source-$GITHUB_REF_NAME.tar.gz" "swu-tokens-source-$GITHUB_REF_NAME"
       - name: Download all existing artifacts
         uses: actions/download-artifact@v4
