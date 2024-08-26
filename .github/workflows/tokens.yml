@@ -14,6 +14,8 @@ jobs:
     name: Compile OpenScad Files
     needs: get-manifest
     runs-on: ubuntu-latest
+    env: 
+      FONTS_INSTALL_DIR: ~/.local/share/fonts
     strategy:
         matrix: ${{fromJson(needs.get-manifest.outputs.manifest)}}
     steps:
@@ -22,6 +24,11 @@ jobs:
           sudo apt update
           sudo apt install -y openscad
       - uses: actions/checkout@v4   
+      - name: Install Fonts
+        run: |
+          mkdir -p $FONTS_INSTALL_DIR
+          cp -r fonts/* $FONTS_INSTALL_DIR
+          fc-cache -f -v
       - run: mkdir -p build/${{ matrix.target }}
       - name: Compile Component
         run: openscad -o "build/${{ matrix.target }}/${{ matrix.component }}.stl" "target/${{ matrix.target }}/${{ matrix.component }}.scad"
