@@ -77,36 +77,37 @@ module cutout_side() {
         }
 }
 
+module rack_base() {
+    difference() {
+        rack_housing();
+        // front long side
+        cutout_side();
+        // Rear long side
+        rotate([0,0,180])
+        cutout_side();
+        // Narrow sides mid
+        translate([w/2,-base_height/2,-1])
+        rotate([0,0,90])
+        cutout_single();
+        rotate([0,0,180])
+        translate([w/2 - wall_thickness,-base_height/2,0])
+        rotate([0,0,90])
+        cutout_single();
+        //interior rectangle
+        translate([0,0,-3*wall_thickness])
+        linear_extrude(2*h)
+        minkowski(){
+            square([initiative_w - 4*wall_thickness,initiative_w - 4*wall_thickness], center=true);
+            circle(wall_thickness/2);
+        }
+        // Initiative token cutout
+        translate([0,15,h-initiative_t-damage_t])
+        initiative_token_cutout();
+        // Damage Counter Cutout
+        translate([0,15,h-damage_t])
+        damage_token_cutout();
 
-difference() {
-    rack_housing();
-    // front long side
-    cutout_side();
-    // Rear long side
-    rotate([0,0,180])
-    cutout_side();
-    // Narrow sides mid
-    translate([w/2,-base_height/2,-1])
-    rotate([0,0,90])
-    cutout_single();
-    rotate([0,0,180])
-    translate([w/2 - wall_thickness,-base_height/2,0])
-    rotate([0,0,90])
-    cutout_single();
-    //interior rectangle
-    translate([0,0,-3*wall_thickness])
-    linear_extrude(2*h)
-    minkowski(){
-        square([initiative_w - 4*wall_thickness,initiative_w - 4*wall_thickness], center=true);
-        circle(wall_thickness/2);
     }
-    // Initiative token cutout
-    translate([0,15,h-initiative_t-damage_t])
-    initiative_token_cutout();
-    // Damage Counter Cutout
-    translate([0,15,h-damage_t])
-    damage_token_cutout();
-
 }
 
 
