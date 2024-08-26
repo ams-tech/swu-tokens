@@ -5,6 +5,12 @@ base_width = 16;
 base_height = 24;
 base_thickness = 2.75;
 
+minkowski_thickness = .75;
+
+_w = base_width - 2*minkowski_thickness;
+_h = base_height - 2*minkowski_thickness;
+_t = base_thickness - 2*minkowski_thickness;
+
 text_font_size = 4;
 number_font_size = 6;
 
@@ -16,6 +22,18 @@ border_relief = 1;
 
 corner = 1.5;
 notch = 5;
+
+module token_base_polygon_pre() {
+    points=[
+        [0, notch, corner],
+        [0, _w, corner],
+        [_h - notch, _w, corner],
+        [_h, _w - notch, corner],
+        [_h, 0, corner],
+        [notch, 0, corner],
+    ];
+    polygon(polyRound(points,5));
+}
 
 module token_base_polygon() {
     points=[
@@ -30,12 +48,14 @@ module token_base_polygon() {
 }
 
 module token_base() {
-    difference() {
-            linear_extrude(height=base_thickness){        
-        token_base_polygon();
-    }
+    translate([minkowski_thickness,minkowski_thickness,minkowski_thickness])
+    minkowski() {
+        linear_extrude(height=_t)      
+        token_base_polygon_pre();
+        sphere(1);
     }
 }
+
 
 module token_insert_floor_polygon() {
     points=[
