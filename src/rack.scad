@@ -102,7 +102,6 @@ module rack_base() {
 minkowski()
 {
     rack_base();
-    sphere(rounding);
 }
 
 

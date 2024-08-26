@@ -1,3 +1,8 @@
 use <../../src/rack.scad>
 
-rack_base();
+$fn = 50;
+minkowski()
+{
+    rack_base();
+    sphere(rounding);
+}
