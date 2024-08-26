@@ -16,8 +16,8 @@ wall_thickness = 1;
 rounding = .4;
 
 
-initiative_w = 39;
-initiative_h = 37;
+initiative_w = 37;
+initiative_h = 35;
 initiative_t = 3.5;
 
 gap = 6;
