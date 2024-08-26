@@ -1,4 +1,3 @@
-$fn=100;
 use <one-damage.scad>
 include <common.scad>
 
@@ -7,17 +6,19 @@ w = 82;
 l = 69;
 h = 35;
 
-initiative_w = 37;
-initiative_h = 35;
-initiative_t = 3.5;
 
 damage_w = 70;
 damage_h = 35;
 damage_t = 6;
 
 
-wall_thickness = 2.5;
-rounding = 1;
+wall_thickness = 2;
+rounding = .5;
+
+
+initiative_w = 37;
+initiative_h = 35;
+initiative_t = 3.5;
 
 gap = 6;
 
@@ -32,12 +33,8 @@ module damage_token_cutout() {
 }
 
 module rack_housing() {
-    translate([rounding, rounding,0])
-    linear_extrude(h-1)
-    minkowski() {
-        square([w - rounding -1, l - rounding -1], center=true);
-        circle(rounding);
-    }
+    translate([0,0,h/2 - rounding])
+    cube([w-2*rounding, l - 2*rounding, h - 2*rounding], center=true);
 }
 
 module cutout_single() {
@@ -45,7 +42,7 @@ module cutout_single() {
     translate([0,0,wall_thickness])
     linear_extrude(h)
     {
-        token_insert_floor_polygon();
+        square([base_height+2*rounding, base_width+2*rounding]);
     } 
     
     translate([0,0,-5])
@@ -54,23 +51,15 @@ module cutout_single() {
         // The lower cutout
         translate([2 * wall_thickness, -3 *wall_thickness, 0])
         {
-            square([base_width - wall_thickness,5*wall_thickness]);
+            square([base_width - wall_thickness,10*wall_thickness]);
         }
-        inner_cutout_scale = .75;
-        translate(
-            [base_height * (1 - inner_cutout_scale) / 2,
-             base_width * (1 - inner_cutout_scale) / 2,
-             0
-            ])
-        scale([inner_cutout_scale, inner_cutout_scale, 0])
-        token_insert_floor_polygon();
     }
 }
 
 module cutout_side() {
        translate([-w/2,-h,0])
        for ( i = [0 : 2] ){
-           translate([wall_thickness + i * (base_height + wall_thickness), wall_thickness, -1]) 
+           translate([wall_thickness - rounding + i * (base_height + wall_thickness + rounding), wall_thickness, -1]) 
             {
                 cutout_single();
             }
@@ -86,11 +75,11 @@ module rack_base() {
         rotate([0,0,180])
         cutout_side();
         // Narrow sides mid
-        translate([w/2,-base_height/2,-1])
+        translate([w/2 - wall_thickness,-base_height/2,-1])
         rotate([0,0,90])
         cutout_single();
         rotate([0,0,180])
-        translate([w/2 - wall_thickness,-base_height/2,0])
+        translate([w/2 - wall_thickness - 2 * rounding,-base_height/2,0])
         rotate([0,0,90])
         cutout_single();
         //interior rectangle
@@ -108,6 +97,12 @@ module rack_base() {
         damage_token_cutout();
 
     }
+}
+
+minkowski()
+{
+    rack_base();
+    sphere(rounding);
 }
 
 
