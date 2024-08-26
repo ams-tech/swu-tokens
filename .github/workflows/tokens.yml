@@ -56,7 +56,7 @@ jobs:
       - name: Upload Release Package
         uses: actions/upload-artifact@v4
         with:
-          name: release-package-${{ github.job }}
+          name: release-package-${{ github.run_number }}
           path: |
             build
   release:
@@ -68,7 +68,7 @@ jobs:
       - name: Download Release Package Artifact
         uses: actions/download-artifact@v4
         with: 
-          name: release-package-${{ github.job }}
+          name: release-package-${{ github.run_number }}
           path: swu-tokens-stl-files-${{ github.ref_name }}
       - name: Display structure of downloaded files
         run: ls -R
