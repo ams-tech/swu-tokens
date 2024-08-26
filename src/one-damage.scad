@@ -34,7 +34,7 @@ module one_damage_bottom_silk() {
 }
 
 module one_damage_token_silk() {
-    color("red") {
+    color("white") {
         translate([0,0,base_thickness - silk_thickness])
         one_damage_top_silk();
         one_damage_bottom_silk();
@@ -43,19 +43,24 @@ module one_damage_token_silk() {
 
 
 module one_damage_token_base() {
-    difference() {
-        token_base();
+    color("red") {
+        difference() {
+            token_base();
 
-        translate([0,0,-silk_thickness])
-        scale([1,1,2])
-        one_damage_bottom_silk();
-        
-        translate([0,0,base_thickness-silk_thickness])
-        scale([1,1,2])
-        one_damage_top_silk();
+            translate([0,0,-silk_thickness])
+            scale([1,1,2])
+            one_damage_bottom_silk();
+            
+            translate([0,0,base_thickness-silk_thickness])
+            scale([1,1,2])
+            one_damage_top_silk();
+        }
     }
 }
 
+module one_damage_token() {
+    one_damage_token_base();
+    one_damage_token_silk();
+}
 
-one_damage_token_base();
-one_damage_token_silk();
+one_damage_token();

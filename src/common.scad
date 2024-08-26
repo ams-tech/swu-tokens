@@ -3,7 +3,7 @@ include <polyround.scad>
 // Token base properties
 base_width = 16;
 base_height = 24;
-base_thickness = 3;
+base_thickness = 2.75;
 
 text_font_size = 4;
 number_font_size = 6;
@@ -37,16 +37,21 @@ module token_base() {
     }
 }
 
-// A shape that can hold the token flipped in either orientation
-module token_insert_floor() {
+module token_insert_floor_polygon() {
     points=[
         [0, base_width, corner],
         [base_height, base_width, corner],
         [base_height, 0, corner],
         [0, 0, corner],
     ];
-    linear_extrude(height=base_thickness)
     polygon(polyRound(points,5));
+}
+
+// A shape that can hold the token flipped in either orientation
+module token_insert_floor() {
+
+    linear_extrude(height=base_thickness)
+    token_insert_floor_polygon();
 }
 
 
