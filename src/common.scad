@@ -52,7 +52,7 @@ module token_base() {
     minkowski() {
         linear_extrude(height=_t)      
         token_base_polygon_pre();
-        sphere(1);
+        sphere(minkowski_thickness);
     }
 }
 

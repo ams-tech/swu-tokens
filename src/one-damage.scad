@@ -21,7 +21,6 @@ module one_damage_top_silk() {
     }
 }
 
-
 module one_damage_bottom_silk() {
     //bottom silk
     linear_extrude(height=silk_thickness) 
