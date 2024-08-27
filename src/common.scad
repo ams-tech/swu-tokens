@@ -44,12 +44,13 @@ module token_base_polygon() {
         [base_height, 0, corner],
         [notch, 0, corner],
     ];
-    polygon(polyRound(points,5));
+    polygon(polyRound(points,50));
 }
 
 module token_base() {
     translate([minkowski_thickness,minkowski_thickness,minkowski_thickness])
     minkowski() {
+        $fn = 100;
         linear_extrude(height=_t)      
         token_base_polygon_pre();
         sphere(minkowski_thickness);
