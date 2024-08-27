@@ -4,5 +4,5 @@ $fn = 50;
 minkowski()
 {
     rack_base();
-    sphere(rounding);
+    sphere(0.3);
 }
