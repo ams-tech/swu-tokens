@@ -44,7 +44,7 @@ module token_base_polygon() {
         [base_height, 0, corner],
         [notch, 0, corner],
     ];
-    polygon(polyRound(points,50));
+    polygon(polyRound(points,5));
 }
 
 module token_base() {

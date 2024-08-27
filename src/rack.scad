@@ -13,11 +13,11 @@ damage_t = 7;
 
 
 wall_thickness = 1;
-rounding = .35;
+rounding = .3;
 
 
 initiative_w = 39;
-initiative_h = 33;
+initiative_h = 31;
 initiative_t = 3.5;
 
 gap = 6;
@@ -38,7 +38,7 @@ module rack_housing() {
 }
 
 module cutout_single() {
-    scale([1.02, 1.02, 2]) 
+    scale([1.04, 1.04, 2]) 
     translate([0,0,wall_thickness])
     linear_extrude(h)
     {
@@ -59,7 +59,7 @@ module cutout_single() {
 module cutout_side() {
        translate([-w/2,-h,0])
        for ( i = [0 : 2] ){
-           translate([.5 + i * (base_height + 4 * rounding + .75), wall_thickness, -1]) 
+           translate([.5 + i * (base_height * 1.02 + 4 * rounding + .75), wall_thickness, -1]) 
             {
                 cutout_single();
             }
