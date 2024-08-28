@@ -32,7 +32,7 @@ module token_cutout_2d() {
 }
 
 module token_cutout_3d(total_height) {
-    token_floor_cutout_scale = 0.75;
+    token_floor_cutout_scale = 0.6;
 
     translate([0,0,wall_thickness-rounding])
     linear_extrude(total_height)
