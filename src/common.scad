@@ -5,7 +5,7 @@ base_width = 16;
 base_height = 24;
 base_thickness = 2.75;
 
-minkowski_thickness = .75;
+minkowski_thickness = .25;
 
 _w = base_width - 2*minkowski_thickness;
 _h = base_height - 2*minkowski_thickness;
