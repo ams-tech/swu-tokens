@@ -13,7 +13,7 @@ damage_t = 7;
 
 
 wall_thickness = 1;
-rounding = .3;
+rounding = .75;
 
 
 initiative_w = 39;
@@ -98,13 +98,6 @@ module rack_base() {
 
     }
 }
-
-minkowski()
-{
-    rack_base();
-    //sphere(rounding);
-}
-
 
 module one_tokens() {
     for ( i = [0 : 9] )
