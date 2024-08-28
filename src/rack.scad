@@ -13,11 +13,11 @@ damage_t = 7;
 
 
 wall_thickness = 1;
-rounding = .75;
+rounding = .3;
 
 
 initiative_w = 39;
-initiative_h = 31;
+initiative_h = 29;
 initiative_t = 3.5;
 
 gap = 6;
