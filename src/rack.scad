@@ -103,5 +103,3 @@ module rack(total_height=h_working) {
         dice_cutout_3d(total_height);
     }
 }
-
-rack();
