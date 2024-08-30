@@ -6,15 +6,17 @@ w = 82;
 l = 69;
 h = 35;
 
-
 damage_w = 72;
 damage_h = 37;
 damage_t = 7;
 
 
-wall_thickness = 1;
+wall_thickness = 1.1;
 rounding = .5;
 
+w_working = w - 2*rounding;
+l_working = l - 2*rounding;
+h_working = h - 2*rounding;
 
 initiative_w = 39;
 initiative_h = 31;
@@ -48,15 +50,21 @@ module token_cutout_3d(total_height) {
     }
 }
 
-module minimal_token_housing(total_height=h) {
+module minimal_token_housing(total_height=h_working) {
 
+    difference() {
+        cube([l_working, w_working, total_height]);
+        
 
-difference() {
-    linear_extrude(total_height)
-    square(total_token_cutout_2d + [2*(wall_thickness - rounding), 2*(wall_thickness-rounding)]);
+        l_extra = l_working - 3 * total_token_cutout_x;
 
-    translate([wall_thickness-rounding,wall_thickness-rounding,0])
-    token_cutout_3d(total_height);
-}
+        l_offset = l_extra / 3;
+
+        for (x = [1:3]) {
+            translate([wall_thickness-2*rounding,wall_thickness-2*rounding,0])
+            token_cutout_3d(total_height);
+        }
+
+    }
 
 }

@@ -4,6 +4,6 @@ $fn = 50;
 minkowski()
 {
     minimal_token_housing(12);
-    sphere(rounding);
+    //sphere(rounding);
 }
 
