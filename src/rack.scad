@@ -33,7 +33,7 @@ total_token_cutout_2d = [total_token_cutout_x, total_token_cutout_y];
 token_floor_cutout_scale = 0.66;
 
 dice_side_physical = 19.6;
-dice_side = dice_side_physical + token_clearance_toleraance;
+dice_side = dice_side_physical + token_clearance_toleraance + 2 * rounding;
 
 working_wall = wall_thickness-2*rounding;
 
@@ -102,7 +102,6 @@ module rack(total_height=h_working) {
         translate([(l_working-dice_side)/2,w_working/2 - dice_side,0])
         dice_cutout_3d(total_height);
     }
-
-
-
 }
+
+rack();
