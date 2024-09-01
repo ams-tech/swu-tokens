@@ -20,7 +20,7 @@ l_working = l - 2*rounding;
 h_working = h - 2*rounding;
 
 initiative_w = 36.6;
-initiative_h = 34.6;
+initiative_h = 32;
 initiative_t = 3;
 
 gap = 6;
@@ -36,6 +36,15 @@ dice_side_physical = 19.6;
 dice_side = dice_side_physical + token_clearance_toleraance + 2 * rounding;
 
 working_wall = wall_thickness-2*rounding;
+
+// initiative token cutout on top
+// The top portion of the cutout
+_d_w_t = damage_t + rounding + token_clearance_toleraance;
+_d_w_w = damage_w + 2*rounding + token_clearance_toleraance;
+_d_w_h = damage_h + 2*rounding + token_clearance_toleraance;
+_initiative_working_h = initiative_h + 2 *rounding + token_clearance_toleraance;
+_initiative_working_w = initiative_w + 2 *rounding + token_clearance_toleraance;
+_initiative_working_t = initiative_t + rounding + token_clearance_toleraance;
 
 module token_cutout_2d() {
     square(total_token_cutout_2d);
@@ -61,11 +70,11 @@ module token_cutout_3d(total_height) {
 module dice_cutout_3d(total_height) {
     
     translate([0,0,working_wall])
-    cube([dice_side,2*dice_side,total_height]);
+    cube([dice_side,2*dice_side,dice_side]);
 
-    translate([dice_side * (1-token_floor_cutout_scale) / 2,dice_side * (1-token_floor_cutout_scale),0])
+    translate([dice_side * (1-token_floor_cutout_scale) / 2,dice_side * (1-token_floor_cutout_scale),-2*total_height])
     scale(token_floor_cutout_scale)
-    cube([dice_side,2*dice_side,total_height]);
+    cube([dice_side,2*dice_side,4*total_height]);
 }
 
 module rack(total_height=h_working) {
@@ -98,8 +107,19 @@ module rack(total_height=h_working) {
         translate([(l_working-total_token_cutout_y)/2,w_working-wall_thickness+2*rounding,0])
         rotate(-90)
         token_cutout_3d(total_height);
-        //dice cutout in center
-        translate([(l_working-dice_side)/2,w_working/2 - dice_side,0])
+        // dice cutout in center
+        translate([(l_working-dice_side)/2,w_working/2 - dice_side,total_height-_d_w_t-_initiative_working_t-dice_side])
         dice_cutout_3d(total_height);
+
+
+        translate([0,0,-_d_w_t])
+        {
+            translate([(l_working-_initiative_working_h)/2 + 3, (w_working - _initiative_working_w)/2 , total_height-_initiative_working_t])
+            cube([_initiative_working_h, _initiative_working_w, _initiative_working_t]);
+            // damage counter cutout on top
+
+            translate([(l_working-_d_w_h)/2 + 3,(w_working-_d_w_w)/2,total_height])
+            cube([_d_w_h, _d_w_w, _d_w_t]);
+        }
     }
 }
