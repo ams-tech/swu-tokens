@@ -6,9 +6,9 @@ w = 82;
 l = 69;
 h = 35;
 
-damage_w = 72;
-damage_h = 37;
-damage_t = 7;
+damage_w = 69;
+damage_h = 34;
+damage_t = 5.5;
 
 
 
@@ -19,9 +19,9 @@ w_working = w - 2*rounding;
 l_working = l - 2*rounding;
 h_working = h - 2*rounding;
 
-initiative_w = 39;
-initiative_h = 31;
-initiative_t = 3.5;
+initiative_w = 36.6;
+initiative_h = 34.6;
+initiative_t = 3;
 
 gap = 6;
 token_clearance_toleraance = 0.25;
