@@ -12,8 +12,8 @@ damage_t = 5.5;
 
 
 
-wall_thickness = 1.1;
-rounding = .5;
+wall_thickness = 2.1;
+rounding = .8;
 
 w_working = w - 2*rounding;
 l_working = l - 2*rounding;
@@ -68,9 +68,11 @@ module token_cutout_3d(total_height) {
 }
 
 module dice_cutout_3d(total_height) {
-    
+    translate([dice_side*(1-token_floor_cutout_scale)/2,-dice_side/2,working_wall+dice_side*(1-token_floor_cutout_scale)])
+    cube([dice_side*token_floor_cutout_scale,3*dice_side,total_height]);
+
     translate([0,0,working_wall])
-    cube([dice_side,2*dice_side,dice_side]);
+    cube([dice_side,2*dice_side,total_height]);
 
     translate([dice_side * (1-token_floor_cutout_scale) / 2,dice_side * (1-token_floor_cutout_scale),-2*total_height])
     scale(token_floor_cutout_scale)
