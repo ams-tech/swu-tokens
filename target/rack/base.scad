@@ -5,6 +5,6 @@ minkowski()
 {
 
     rack();
-    //sphere(rounding);
+    sphere(rounding);
 }
 
