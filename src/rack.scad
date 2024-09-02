@@ -79,7 +79,7 @@ module dice_cutout_3d(total_height) {
     cube([dice_side,2*dice_side,4*total_height]);
 }
 
-module rack(total_height=h_working) {
+module rack_cutouts(total_height=h_working) {
 
     
     w_extra = w_working - 3 * total_token_cutout_y;
@@ -125,3 +125,20 @@ module rack(total_height=h_working) {
         }
     }
 }
+
+magnet_d = 3.08;
+magnet_t = 1.08;
+magnet_top = 0.16;
+
+module rack(total_height=h) {
+    $fn = 15;
+    minkowski(){
+        rack_cutouts(total_height-2*rounding);
+        //sphere(rounding);
+    }
+    
+    color([1,0,0])
+    cylinder(d=magnet_d, h=magnet_t);
+}
+
+rack();
