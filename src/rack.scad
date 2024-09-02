@@ -20,7 +20,7 @@ l_working = l - 2*rounding;
 h_working = h - 2*rounding;
 
 initiative_w = 36.6;
-initiative_h = 32;
+initiative_h = 33;
 initiative_t = 3;
 
 gap = 6;
@@ -114,7 +114,7 @@ module rack(total_height=h_working) {
 
         translate([0,0,-_d_w_t])
         {
-            translate([(l_working-_initiative_working_h)/2 + 3, (w_working - _initiative_working_w)/2 , total_height-_initiative_working_t])
+            translate([(l_working-_initiative_working_h)/2 + 2.5, (w_working - _initiative_working_w)/2 , total_height-_initiative_working_t])
             cube([_initiative_working_h, _initiative_working_w, _initiative_working_t]);
             // damage counter cutout on top
 
