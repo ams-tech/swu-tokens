@@ -5,7 +5,7 @@ module battle_droid_token_design() {
 translate([base_height*.5, base_width*.5,0])
 scale(.07)
 rotate(-90)
-import("droid-head.svg", center=true);
+import("droid-head-3.svg", center=true);
 
     translate([base_height * .69, base_width * .5, 0])
       rotate(a=[0, 0, 270])

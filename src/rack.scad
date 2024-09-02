@@ -6,7 +6,7 @@ w = 82;
 l = 69;
 h = 35;
 
-damage_w = 69;
+damage_w = 71.5;
 damage_h = 34;
 damage_t = 5.5;
 
