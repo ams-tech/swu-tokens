@@ -13,7 +13,7 @@ damage_t = 5.5;
 
 
 wall_thickness = 2.1;
-rounding = .8;
+rounding = .6;
 
 w_working = w - 2*rounding;
 l_working = l - 2*rounding;
@@ -79,7 +79,7 @@ module dice_cutout_3d(total_height) {
     cube([dice_side,2*dice_side,4*total_height]);
 }
 
-middle_secion_shift = 2.4;
+middle_secion_shift = 2.7;
 
 module rack_cutouts(total_height=h_working) {
 
@@ -210,4 +210,4 @@ module lid() {
 
 }
 
-rack();
+rounded_rack(h);
