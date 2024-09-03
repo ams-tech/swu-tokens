@@ -130,15 +130,42 @@ magnet_d = 3.08;
 magnet_t = 1.08;
 magnet_top = 0.16;
 
+module magnet(total_height) {
+    color([1,0,0])
+    translate([0,0,total_height-rounding-magnet_t-magnet_top])
+    cylinder(d=magnet_d, h=magnet_t);
+}
+
+module magnets(total_height){
+    near_x_offset = (l_working-base_height-token_clearance_toleraance-magnet_d-rounding)/2;
+    far_x_offset = near_x_offset + base_height+token_clearance_toleraance+magnet_d+rounding;
+    near_y_offset = (magnet_d+rounding)/2;
+    far_y_offset = w - magnet_d - rounding/2;
+
+    translate([near_x_offset,near_y_offset,0])
+    magnet(total_height);
+
+    translate([far_x_offset,near_y_offset,0])
+    magnet(total_height);
+
+    translate([near_x_offset,far_y_offset,0])
+    magnet(total_height);
+
+    translate([far_x_offset,far_y_offset,0])
+    magnet(total_height);
+}
+
+$fn = 10;
 module rack(total_height=h) {
-    $fn = 15;
-    minkowski(){
-        rack_cutouts(total_height-2*rounding);
-        //sphere(rounding);
+
+    difference() {
+        minkowski(){
+            rack_cutouts(total_height-2*rounding);
+            sphere(rounding);
+        }
+        magnets(total_height);
     }
     
-    color([1,0,0])
-    cylinder(d=magnet_d, h=magnet_t);
 }
 
 rack();
