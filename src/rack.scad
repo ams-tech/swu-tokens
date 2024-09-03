@@ -192,7 +192,7 @@ module lid() {
             translate([0,0,top_thickness+rounding])
             linear_extrude(top_thickness + lip_thickness)
             minkowski() {
-                square([l_working-2*(rounding)+token_clearance_toleraance, w_working + token_clearance_toleraance], center=true);
+                square([l_working+token_clearance_toleraance, w_working + token_clearance_toleraance], center=true);
                 circle(rounding);
             }
         }
