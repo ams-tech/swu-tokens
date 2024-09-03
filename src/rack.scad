@@ -154,7 +154,6 @@ module magnets(total_height){
     magnet(total_height);
 }
 
-$fn = 10;
 
 module rounded_rack(total_height) {
     minkowski(){
@@ -202,5 +201,5 @@ module lid() {
     }
 }
 
-lid();
+//lid();
 //rack();
