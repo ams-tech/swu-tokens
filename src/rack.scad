@@ -126,7 +126,7 @@ module rack_cutouts(total_height=h_working) {
     }
 }
 
-magnet_d = 3.08;
+magnet_d = 3.16;
 magnet_t = 1.24;
 magnet_top = 0.16;
 
