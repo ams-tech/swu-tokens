@@ -174,8 +174,33 @@ module rack(total_height=h) {
         translate([0,0,h_working-magnet_t-magnet_top])
         magnets();
     }
-
-    
 }
 
-rack();
+module lid() {
+    lip_thickness = 2*wall_thickness;
+    top_thickness = magnet_t + 3*magnet_top;
+
+    color("blue")
+    difference() {
+        translate([l_working/2, w_working/2, 0])
+        difference(){
+            linear_extrude(top_thickness + lip_thickness)
+            minkowski() {
+                square([l_working+2*(wall_thickness - rounding), w_working+2*wall_thickness], center=true);
+                circle(rounding);
+            }
+            translate([0,0,top_thickness+rounding])
+            linear_extrude(top_thickness + lip_thickness)
+            minkowski() {
+                square([l_working-2*(rounding)+token_clearance_toleraance, w_working + token_clearance_toleraance], center=true);
+                circle(rounding);
+            }
+        }
+
+        translate([0,0,top_thickness+rounding-magnet_t-magnet_top])
+        magnets();
+    }
+}
+
+lid();
+//rack();
