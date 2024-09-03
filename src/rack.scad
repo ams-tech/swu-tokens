@@ -174,10 +174,10 @@ module rack(total_height=h) {
         translate([-rounding,-rounding,h_working])
         cube([l,w,h]);
 
+
+    }
         translate([0,0,h_working-magnet_t-magnet_top])
         magnets();
-    }
-
 }
 
 module lid() {
@@ -199,19 +199,15 @@ module lid() {
                 square([l_working+token_clearance_toleraance, w_working + token_clearance_toleraance], center=true);
                 circle(rounding);
             }
-            translate([0,0,top_thickness+rounding-magnet_t-magnet_top])
-            {
-                magnets();
-
-                translate([l - 2 * near_x_offset,0,0])
-                magnets();
-            }
         }
+        translate([0,0,top_thickness+rounding-magnet_t-magnet_top])
+        {
+        magnets();
 
-
+        translate([l - 2 * near_x_offset,0,0])
+        magnets();
+        }
     }
-    
-
 
 }
 
