@@ -79,6 +79,8 @@ module dice_cutout_3d(total_height) {
     cube([dice_side,2*dice_side,4*total_height]);
 }
 
+middle_secion_shift = 2.4;
+
 module rack_cutouts(total_height=h_working) {
 
     
@@ -101,21 +103,23 @@ module rack_cutouts(total_height=h_working) {
         rotate(180)
         translate([-l_working,-w_working,0])
         long_side();
-        // near side of x axis
-        rotate(90)
-        translate([working_wall,(-total_token_cutout_y-l_working)/2,0])
-        token_cutout_3d(total_height);
-        // far side of x axis
-        translate([(l_working-total_token_cutout_y)/2,w_working-wall_thickness+2*rounding,0])
-        rotate(-90)
-        token_cutout_3d(total_height);
-        // dice cutout in center
-        translate([(l_working-dice_side)/2,w_working/2 - dice_side,total_height-_d_w_t-_initiative_working_t-dice_side])
-        dice_cutout_3d(total_height);
 
-
-        translate([0,0,-_d_w_t])
+        // Middle Section
+        translate([middle_secion_shift,0,0])
         {
+
+            // near side of x axis
+            rotate(90)
+            translate([working_wall,(-total_token_cutout_y-l_working)/2,0])
+            token_cutout_3d(total_height);
+            // far side of x axis
+            translate([(l_working-total_token_cutout_y)/2,w_working-wall_thickness+2*rounding,0])
+            rotate(-90)
+            token_cutout_3d(total_height);
+            // dice cutout in center
+            translate([(l_working-dice_side)/2,w_working/2 - dice_side,total_height-_d_w_t-_initiative_working_t-dice_side])
+            dice_cutout_3d(total_height);
+
             translate([(l_working-_initiative_working_h)/2 + 2.5, (w_working - _initiative_working_w)/2 , total_height-_initiative_working_t])
             cube([_initiative_working_h, _initiative_working_w, _initiative_working_t]);
             // damage counter cutout on top
@@ -123,11 +127,14 @@ module rack_cutouts(total_height=h_working) {
             translate([(l_working-_d_w_h)/2 + 3,(w_working-_d_w_w)/2,total_height])
             cube([_d_w_h, _d_w_w, _d_w_t]);
         }
+
+
+            
     }
 }
 
-magnet_d = 3.2;
-magnet_t = 1.3;
+magnet_d = 6.1;
+magnet_t = 2;
 magnet_top = 0.3;
 
 module magnet(total_height) {
@@ -135,23 +142,20 @@ module magnet(total_height) {
     cylinder(d=magnet_d, h=magnet_t);
 }
 
+    near_x_offset = (l_working-base_height-magnet_d-rounding)/2 + middle_secion_shift;
+    near_y_offset = magnet_d/2 - rounding + total_token_cutout_x;
+    far_y_offset = w - magnet_d/2 - total_token_cutout_x;
+
 module magnets(total_height){
-    near_x_offset = (l_working-base_height-token_clearance_toleraance-magnet_d-rounding)/2;
-    far_x_offset = near_x_offset + base_height+token_clearance_toleraance+magnet_d+rounding;
-    near_y_offset = (magnet_d+rounding)/2;
-    far_y_offset = w - magnet_d - rounding/2;
+
 
     translate([near_x_offset,near_y_offset,0])
     magnet(total_height);
 
-    translate([far_x_offset,near_y_offset,0])
-    magnet(total_height);
 
     translate([near_x_offset,far_y_offset,0])
     magnet(total_height);
 
-    translate([far_x_offset,far_y_offset,0])
-    magnet(total_height);
 }
 
 
@@ -170,9 +174,10 @@ module rack(total_height=h) {
         translate([-rounding,-rounding,h_working])
         cube([l,w,h]);
 
+
+    }
         translate([0,0,h_working-magnet_t-magnet_top])
         magnets();
-    }
 }
 
 module lid() {
@@ -195,11 +200,18 @@ module lid() {
                 circle(rounding);
             }
         }
-
         translate([0,0,top_thickness+rounding-magnet_t-magnet_top])
+        {
         magnets();
+
+        translate([l - 2 * near_x_offset,0,0])
+        magnets();
+        }
+
     }
+
+
 }
 
-//lid();
+lid();
 //rack();
