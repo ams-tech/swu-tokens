@@ -127,7 +127,7 @@ module rack_cutouts(total_height=h_working) {
 }
 
 magnet_d = 3.08;
-magnet_t = 1.16;
+magnet_t = 1.24;
 magnet_top = 0.16;
 
 module magnet(total_height) {
@@ -166,13 +166,13 @@ module rounded_rack(total_height) {
 module rack(total_height=h) {
 
     difference(){
-    rounded_rack(total_height);
+        rounded_rack(total_height);
 
-    translate([-rounding,-rounding,h_working])
-    cube([l,w,h]);
+        translate([-rounding,-rounding,h_working])
+        cube([l,w,h]);
 
         translate([0,0,h_working-magnet_t-magnet_top])
-    magnets();
+        magnets();
     }
 
     
