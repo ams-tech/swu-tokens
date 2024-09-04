@@ -13,7 +13,7 @@
 * Token Rack
   *  Import the `lid.stl` and/or `base.stl` into your slicer
   *  Optional magnetic lid:
-    *  Slice the objects, pausing the print at the top of the maagnet cutouts in each model
+    *  Slice the objects, pausing the print at the top of the magnet cutouts in each model
     *  Inset magnets; d=6mm h=1mm (you may need to tweak the magnet size based on your parts)
       * WARNING: Ensure magnets are below your print head
       * Remember: magnet polarity is important
