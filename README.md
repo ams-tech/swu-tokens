@@ -1,10 +1,16 @@
-# Adam's Star Wars: Unlimited Tokens
+# FOSS Star Wars: Unlimited Play Tokens
 
-This repository contains the design files and build processes for Adam's 3D printed SWU token set.
+This repository contains the design files and build processes for an open source 3D printed SWU token set.
 The tokens are dual-sided, and require a relatively fine printer to print; I've only used the Bambu A1, but please let me know
 if you've tried any other printers!
 
 If you're looking to print the tokens, check out the "Releases" tab.  Instructions are included in the relese package.
+
+If you're planning on printing the tokens yourself, be sure to check out the LICENSE file -- basically you're free to use these however you'd like, provided:
+
+* You provide credit to the original projecl
+* If you make improvements to the project, you need to share the source code.
+
 
 ## Project Structure
 
